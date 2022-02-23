@@ -6,31 +6,159 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>W-Wave radio</title>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
   <link type="image/x-icon" href="/img/favicon.ico" rel="shortcut icon">
   <link type="Image/x-icon" href="/img/favicon.ico" rel="icon">
-  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
   <link rel="stylesheet" href="/css/choices.min.css" type="text/css">
   <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="/js/choices.min.js"></script>
+  <script src="/js/inputmask.min.js"></script>
+  <script src="/js/just-validate.min.js"></script>
   <script src="/js/index.js"></script>
-  <script>
-    $(function () {
-      $("#accordion").accordion({
-        header: "a",
-        heightStyle: "content",
-      });
-    });
-  </script>
 </head>
 
-<body>
+<body id="body">
+  <div id="MyModal" class="modal">
+    <div class="modal__content" id="modal__content">
+      <div class="modal__container">
+        <a href="#" class="modal__close__link" id="closeModal">
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="21" cy="21" r="19.5" stroke="#A1A6B4" stroke-width="3" />
+            <path d="M29.6777 12L12 29.6777M29.6777 29.6777L12 12" stroke="#A1A6B4" stroke-width="3" />
+          </svg>
+        </a>
+        <form class="modal__form">
+          <h2 class="modal__form__entry">
+            Вход
+          </h2>
+          <div class="modal__form__disc">
+            Если у вас ещё нет аккаунта,
+            <a href="#" class="modal__form__regist">
+              зарегестрируйтесь
+            </a>
+          </div>
+          <input type="text" class="modal__form__input" placeholder="Логин" data-validate-field="login">
+          <input type="password" class="modal__form__input" placeholder="Пароль" data-validate-field="password">
+          <button class="modal__form__submit" type="submit">
+            Войти
+          </button>
+        </form>
+
+        <div class="modal__down">
+          <div class="modal__entry__example">
+            Войти с помощью:
+          </div>
+          <ul class="modal__list">
+            <li class="modal__list__item">
+              <a href="#" class="modal__list__item__link">
+                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M23.3 33.6666V20.7666H27.6204L28.2667 15.7518H23.3V12.5518C23.3 11.0999 23.7037 10.1092 25.7852 10.1092H28.4407V5.62399C27.1552 5.48759 25.8631 5.42145 24.5704 5.42584C20.7426 5.42584 18.1222 7.76288 18.1222 12.0555V15.7518H13.7926V20.7666H18.1222V33.6666H2.18518C1.69404 33.6666 1.22301 33.4715 0.875723 33.1242C0.528433 32.7769 0.333328 32.3059 0.333328 31.8147V2.1851C0.333328 1.69396 0.528433 1.22294 0.875723 0.875647C1.22301 0.528357 1.69404 0.333252 2.18518 0.333252H31.8148C32.306 0.333252 32.777 0.528357 33.1243 0.875647C33.4716 1.22294 33.6667 1.69396 33.6667 2.1851V31.8147C33.6667 32.3059 33.4716 32.7769 33.1243 33.1242C32.777 33.4715 32.306 33.6666 31.8148 33.6666H23.3Z"
+                    fill="#A1A6B4" />
+                </svg>
+              </a>
+            </li>
+            <li class="modal__list__item">
+              <a href="#" class="modal__list__item__link">
+                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="33.33" height="33.33" rx="2" fill="#A1A6B4" />
+                  <path
+                    d="M17.7487 23.3319H16.3854C16.3854 23.3319 13.3772 23.5129 10.7277 20.7544C7.83835 17.746 5.28686 11.7764 5.28686 11.7764C5.28686 11.7764 5.13973 11.3851 5.29964 11.1957C5.47938 10.983 5.96857 10.9693 5.96857 10.9693L9.22782 10.9481C9.22782 10.9481 9.53491 10.9992 9.75468 11.1607C9.93588 11.2939 10.0373 11.5429 10.0373 11.5429C10.0373 11.5429 10.5641 12.8751 11.2617 14.0803C12.6233 16.433 13.2575 16.9476 13.7198 16.6955C14.3934 16.3281 14.1914 13.3697 14.1914 13.3697C14.1914 13.3697 14.2037 12.2959 13.8522 11.8176C13.58 11.4473 13.0667 11.339 12.84 11.3088C12.6566 11.2843 12.9576 10.8586 13.3478 10.6675C13.9343 10.3802 14.9699 10.364 16.1938 10.3764C17.1473 10.3861 17.4219 10.4456 17.7946 10.5356C18.6597 10.7445 18.6327 11.4137 18.5745 12.8577L18.5745 12.8577C18.5571 13.2892 18.537 13.7898 18.537 14.368C18.537 14.4982 18.5332 14.6369 18.5293 14.7797V14.7797C18.509 15.5192 18.4858 16.3655 18.9726 16.6801C19.2223 16.8414 19.8331 16.7041 21.3603 14.1109C22.084 12.8818 22.627 11.4367 22.627 11.4367C22.627 11.4367 22.7453 11.179 22.9297 11.0687C23.1181 10.9559 23.3726 10.9906 23.3726 10.9906L26.8023 10.9694C26.8023 10.9694 27.8329 10.8465 27.9997 11.3117C28.1747 11.7999 27.6146 12.94 26.2135 14.8076C24.8827 16.5812 24.236 17.2331 24.2968 17.8105C24.3401 18.222 24.7429 18.5957 25.5137 19.3109L25.5668 19.3602C27.2548 20.9271 27.7051 21.75 27.8121 21.9455C27.8207 21.9614 27.8271 21.9731 27.8318 21.9807C28.5873 23.2336 26.9939 23.3319 26.9939 23.3319L23.9477 23.3745C23.9477 23.3745 23.2931 23.504 22.4317 22.9124C21.9813 22.6032 21.5409 22.0983 21.1214 21.6173L21.1214 21.6173C20.4798 20.8817 19.8868 20.2018 19.3806 20.3623C18.5317 20.6317 18.5583 22.4611 18.5583 22.4611C18.5583 22.4611 18.5645 22.8518 18.371 23.06C18.1605 23.2865 17.7487 23.3319 17.7487 23.3319Z"
+                    fill="#121723" />
+                </svg>
+              </a>
+            </li>
+            <li class="modal__list__item">
+              <a href="#" class="modal__list__item__link">
+                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="33.33" height="33.33" rx="2" fill="#A1A6B4" />
+                  <path
+                    d="M20.9404 11.9923C20.1518 11.2694 18.7687 10.4043 16.7184 10.4043C13.8309 10.4043 11.3802 12.2649 10.4945 14.8364C10.2761 15.5001 10.1427 16.2111 10.1427 16.9459C10.1427 17.6806 10.2761 18.3917 10.5066 19.0553C11.3802 21.6269 13.8309 23.4874 16.7184 23.4874C18.3441 23.4874 19.5816 23.0489 20.5036 22.4208C21.9595 21.4254 22.6147 19.9441 22.7359 18.9605H16.7184V15.0024H26.9701C27.1278 15.666 27.2007 16.3059 27.2007 17.1829C27.2007 20.4299 26.0116 23.1675 23.9492 25.028C22.1414 26.6634 19.6665 27.6115 16.7184 27.6115C12.4478 27.6115 8.7596 25.2176 6.96405 21.7335C6.22401 20.2877 5.79938 18.6642 5.79938 16.9459C5.79938 15.2275 6.22401 13.604 6.96405 12.1582C8.7596 8.67409 12.4478 6.28027 16.7184 6.28027C19.6665 6.28027 22.1294 7.33499 24.022 9.05333L20.9404 11.9923Z"
+                    fill="#121723" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="MyModal1" class="modal">
+    <div class="modal__content">
+      <div class="modal__container">
+        <a href="javascript:void(0)" class="modal__close__link" id="closeModal1">
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="21" cy="21" r="19.5" stroke="#A1A6B4" stroke-width="3" />
+            <path d="M29.6777 12L12 29.6777M29.6777 29.6777L12 12" stroke="#A1A6B4" stroke-width="3" />
+          </svg>
+        </a>
+        <div class="modal__buy">
+          <h2 class="modal__buy__title">
+            <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_7_159)">
+                <path
+                  d="M23.5 47C36.4785 47 47 36.4786 47 23.5C47 10.5213 36.4785 0 23.5 0C10.5215 0 0 10.5213 0 23.5C0 36.4786 10.5215 47 23.5 47Z"
+                  fill="#F0D288" />
+                <path
+                  d="M39.8053 10.6786L31.0893 7.46582L18.5548 25.5301L19.8028 17.3319L12.9733 13.3536L0.408691 28.4685C0.99694 31.4572 2.13888 34.2442 3.72201 36.7166L11.2182 27.6626L8.45975 38.2965L17.007 41.424L29.7058 23.1395L26.9237 33.5956L33.8477 37.6425L47.1363 24.2464C47.1391 24.096 47.1407 23.9443 47.1407 23.7933C47.1407 20.6395 46.534 17.6285 45.4322 14.8735L37.7131 22.6869L39.8053 10.6786Z"
+                  fill="#121723" />
+              </g>
+              <defs>
+                <clipPath id="clip0_7_159">
+                  <rect width="47" height="47" rx="23.5" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            Отлично!
+          </h2>
+          <div class="modal__buy__disc">
+            Радиоприёмник забронирован
+            <a href="https://market.yandex.ru/" class="modal__buy__ya" target="blank">
+              на Яндекс.Маркете
+            </a>
+          </div>
+
+          <ul class="modal__buy__list">
+            <li class="modal__buy__list__item">
+              <picture>
+                <source srcset="/img/1.png">
+                <img src="/img/1.png" alt="Фото 1" class="modal__picture-img">
+              </picture>
+            </li>
+            <li class="modal__buy__list__item">
+              <picture>
+                <source srcset="/img/2.png">
+                <img src="/img/2.png" alt="Фото 2" class="modal__picture-img">
+              </picture>
+            </li>
+            <li class="modal__buy__list__item">
+              <picture>
+                <source srcset="/img/3.png">
+                <img src="/img/3.png" alt="Фото 3" class="modal__picture-img">
+              </picture>
+            </li>
+          </ul>
+
+          <div class="modal__number__info">
+            Номер вашей брони:
+          </div>
+          <div class="modal__number">
+            3574
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <header class="header">
     <div class="header__logo__up">
       <div class="container header__up__container">
-        <a href="##">
-          <img src="/img/logo.png" alt="" class="logo">
+        <a href="#">
+          <picture>
+            <source srcset="/img/logo-small.png" media="(max-width: 320px)">
+            <img src="/img/logo.png" alt="" class="logo">
+          </picture>
         </a>
         <a href="#" class="header__ent" id="entry2">
           Вход
@@ -43,7 +171,7 @@
           <img src="/img/logo.png" alt="" class="logo-desk">
         </a>
         <nav class="header__nav" id="menu">
-          <a href="##" class="header__point" id="point">
+          <a href="#" class="header__point" id="point">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="4.57538" y="2.95406" width="24" height="3" rx="1.5" transform="rotate(45 4.57538 2.95406)"
                 fill="#6D31EE" />
@@ -51,30 +179,30 @@
                 fill="#6D31EE" />
             </svg>
           </a>
-          <div class="flex__burger">
+          <div class="header__flex__burger">
             <ul class="header__nav__list">
               <li class="header__list__item">
-                <a href="#" class="header__list__item-link">
+                <a href="#podcast" class="header__list__item-link">
                   Подкасты
                 </a>
               </li>
               <li class="header__list__item">
-                <a href="#" class="header__list__item-link">
+                <a href="#broadcast" class="header__list__item-link">
                   Передачи
                 </a>
               </li>
               <li class="header__list__item">
-                <a href="#" class="header__list__item-link">
+                <a href="#guest" class="header__list__item-link">
                   Гости
                 </a>
               </li>
               <li class="header__list__item">
-                <a href="#" class="header__list__item-link">
+                <a href="#music" class="header__list__item-link">
                   Плейлисты
                 </a>
               </li>
               <li class="header__list__item">
-                <a href="#" class="header__list__item-link">
+                <a href="#about" class="header__list__item-link">
                   О нас
                 </a>
               </li>
@@ -93,7 +221,7 @@
             </svg>
           </div>
         </nav>
-        <a href="##" class="header__burger" id="burger">
+        <a href="#" class="header__burger" id="burger">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="24" height="3" rx="1.5" fill="#6D31EE" />
             <rect y="21" width="24" height="3" rx="1.5" fill="#6D31EE" />
@@ -102,7 +230,7 @@
         </a>
         <div class="header__last">
           <div class="header__last__form-container">
-            <button class="header__last__form-btn__open">
+            <button class="header__last__form-btn__open" id="btn__open">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
@@ -112,6 +240,9 @@
               </svg>
             </button>
 
+            <form class="header__last__form" id="form__search">
+              <input type="text" placeholder="Поиск по сайту" class="header__last__form-input">
+            </form>
           </div>
 
           <a href="#" class="header__ent" id="entry">
@@ -123,8 +254,8 @@
 
     <div class="header__down">
       <div class="container header__container">
-        <div class="flex">
-          <ul class="header__list_down" id="list-5">
+        <div class="header__flex">
+          <ul class="header__list__down" id="list-5">
             <li class="header__list__down-item">
               <a href="#" class="header__list__down-item-link">
                 Новости
@@ -157,16 +288,56 @@
             </li>
           </ul>
 
-          <a href="##" class="header__what__link">
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="7.5" cy="7.5" r="7.5" fill="#6D31EE" />
-              <path d="M12 7.00014V8.00014H3V7.00014H12Z" fill="white" />
-              <path d="M8 12.0001H7L7 3.00014L8 3.00014L8 12.0001Z" fill="white" />
-            </svg>
-            Что в эфире?
-          </a>
+          <div class="header__dropdown">
+            <div class="header__container__dropdown">
+              <a href="#" class="header__what__link" id="opened">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" id="svg">
+                  <circle cx="7.5" cy="7.5" r="7.5" fill="#6D31EE" />
+                  <path d="M12 7.00014V8.00014H3V7.00014H12Z" fill="white" />
+                  <path d="M8 12.0001H7L7 3.00014L8 3.00014L8 12.0001Z" fill="white" />
+                </svg>
+                Что в эфире?
+              </a>
+              <ul class="header__list-mus" id="myDropdown">
+                <li class="header__list-mus-item">
+                  <a href="#" class="header__list-mus-item__link">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M10 0C4.475 0 0 4.475 0 10C0 15.525 4.475 20 10 20C15.525 20 20 15.525 20 10C20 4.475 15.525 0 10 0ZM8 14.5V5.5L14 10L8 14.5Z"
+                        fill="#A1A6B4" />
+                    </svg>
+                  </a>
+                  <div class="header__list-mus-item__info">
+                    <div class="header__list-mus-item__info__text">
+                      Ранее в эфире
+                    </div>
+                    <div class="header__list-mus-item__info__title">
+                      «Музыка»
+                    </div>
+                  </div>
+                </li>
+                <li class="header__list-mus-item">
+                  <a href="#" class="header__list-mus-item__link">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M10 0C4.475 0 0 4.475 0 10C0 15.525 4.475 20 10 20C15.525 20 20 15.525 20 10C20 4.475 15.525 0 10 0ZM8 14.5V5.5L14 10L8 14.5Z"
+                        fill="#A1A6B4" />
+                    </svg>
+                  </a>
+                  <div class="header__list-mus-item__info">
+                    <div class="header__list-mus-item__info__text">
+                      Сейчас в эфире
+                    </div>
+                    <div class="header__list-mus-item__info__title">
+                      «Как так?»
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-          <ul class="header__list-mus">
+          <ul class="header__list-mus" id="list__mus">
             <li class="header__list-mus-item">
               <a href="#" class="header__list-mus-item__link">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -176,10 +347,10 @@
                 </svg>
               </a>
               <div class="header__list-mus-item__info">
-                <div class="mus-item__info__text">
+                <div class="header__list-mus-item__info__text">
                   Ранее в эфире
                 </div>
-                <div class="mus-item__info__title">
+                <div class="header__list-mus-item__info__title">
                   «Музыка»
                 </div>
               </div>
@@ -193,16 +364,15 @@
                 </svg>
               </a>
               <div class="header__list-mus-item__info">
-                <div class="mus-item__info__text">
+                <div class="header__list-mus-item__info__text">
                   Сейчас в эфире
                 </div>
-                <div class="mus-item__info__title">
+                <div class="header__list-mus-item__info__title">
                   «Как так?»
                 </div>
               </div>
             </li>
           </ul>
-
           <div class="header__year">
             <div class="header__year__text">
               12+
@@ -232,29 +402,32 @@
     </div>
   </section>
 
-  <section class="podcast">
+  <section class="podcast" id="podcast">
     <div class="container">
       <h2 class="podcast__title">
         Подкасты
       </h2>
       <ul class="podcast__list" id="list-7">
         <li class="podcast__list-item">
-          <img src="/img/item-1__podcast.jpg" alt="">
+          <picture>
+            <source srcset="/img/item1_mobile.jpg" media="(max-width:446px)">
+            <img src="/img/item-1__podcast.jpg" alt="">
+          </picture>
           <div class="podcast__list-item__content">
             <div class="podcast__item__content-up">
               <div class="podcast__item__info">
                 <span class="podcast__item__time">
                   15:43
                 </span>
-                <div class="podcast__item__name">
+                <h3 class="podcast__item__name">
                   Европа. XIX век
-                </div>
+                </h3>
                 <div class="podcast__item__author">
                   Дмитрий Гутенберг
                 </div>
               </div>
 
-              <a href="##" class="podcast__item__play">
+              <a href="#" class="podcast__item__play">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
                   <path
@@ -262,7 +435,7 @@
                     fill="#A1A6B4" />
                 </svg>
               </a>
-              <a href="##" class="podcast__item__pause off">
+              <a href="#" class="podcast__item__pause off">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
                   <rect x="19" y="15" width="2" height="18" rx="1" fill="#A1A6B4" />
@@ -271,7 +444,7 @@
               </a>
             </div>
             <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
@@ -279,7 +452,7 @@
                 </svg>
                 258
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
@@ -288,7 +461,7 @@
 
                 104
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
@@ -301,22 +474,25 @@
           </div>
         </li>
         <li class="podcast__list-item">
-          <img src="/img/item-2__podcast.jpg" alt="">
+          <picture>
+            <source srcset="/img/item2_mobile.jpg" media="(max-width:446px)">
+            <img src="/img/item-2__podcast.jpg" alt="">
+          </picture>
           <div class="podcast__list-item__content">
             <div class="podcast__item__content-up">
               <div class="podcast__item__info">
                 <span class="podcast__item__time">
                   5:32
                 </span>
-                <div class="podcast__item__name">
+                <h3 class="podcast__item__name">
                   О музыке
-                </div>
+                </h3>
                 <div class="podcast__item__author">
                   Дмитрий Гутенберг
                 </div>
               </div>
 
-              <a href="##" class="podcast__item__play">
+              <a href="#" class="podcast__item__play">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
                   <path
@@ -324,7 +500,7 @@
                     fill="#A1A6B4" />
                 </svg>
               </a>
-              <a href="##" class="podcast__item__pause off">
+              <a href="#" class="podcast__item__pause off">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
                   <rect x="19" y="15" width="2" height="18" rx="1" fill="#A1A6B4" />
@@ -333,7 +509,7 @@
               </a>
             </div>
             <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
@@ -341,7 +517,7 @@
                 </svg>
                 207
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
@@ -350,7 +526,7 @@
 
                 34
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
@@ -363,16 +539,19 @@
           </div>
         </li>
         <li class="podcast__list-item">
-          <img src="/img/item-3__podcast.jpg" alt="">
+          <picture>
+            <source srcset="/img/item3_mobile.jpg" media="(max-width:446px)">
+            <img src="/img/item-3__podcast.jpg" alt="">
+          </picture>
           <div class="podcast__list-item__content">
             <div class="podcast__item__content-up">
               <div class="podcast__item__info">
                 <span class="podcast__item__time">
                   8:54
                 </span>
-                <div class="podcast__item__name">
+                <h3 class="podcast__item__name">
                   Люди сегодня
-                </div>
+                </h3>
                 <div class="podcast__item__author">
                   Анна Васильева
                 </div>
@@ -395,7 +574,7 @@
               </a>
             </div>
             <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
@@ -403,7 +582,7 @@
                 </svg>
                 104
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
@@ -412,7 +591,7 @@
 
                 54
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
@@ -425,16 +604,19 @@
           </div>
         </li>
         <li class="podcast__list-item">
-          <img src="/img/item-4__podcast.jpg" alt="">
+          <picture>
+            <source srcset="/img/item4_mobile.jpg" media="(max-width:446px)">
+            <img src="/img/item-4__podcast.jpg" alt="">
+          </picture>
           <div class="podcast__list-item__content">
             <div class="podcast__item__content-up">
               <div class="podcast__item__info">
                 <span class="podcast__item__time">
                   9:04
                 </span>
-                <div class="podcast__item__name">
+                <h3 class="podcast__item__name">
                   Хэллоу, Африка!
-                </div>
+                </h3>
                 <div class="podcast__item__author">
                   Пётр Дмитриевский
                 </div>
@@ -457,7 +639,7 @@
               </a>
             </div>
             <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
@@ -465,7 +647,7 @@
                 </svg>
                 87
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
@@ -474,7 +656,7 @@
 
                 44
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
@@ -486,17 +668,20 @@
             </div>
           </div>
         </li>
-        <li class="podcast__list-item">
-          <img src="/img/item-5__podcast.jpg" alt="">
+        <li class="podcast__list-item off-list">
+          <picture>
+            <source srcset="/img/item4_mobile.jpg" media="(max-width:446px)">
+            <img src="/img/item-5__podcast.jpg" alt="">
+          </picture>
           <div class="podcast__list-item__content">
             <div class="podcast__item__content-up">
               <div class="podcast__item__info">
                 <span class="podcast__item__time">
                   7:03
                 </span>
-                <div class="podcast__item__name">
+                <h3 class="podcast__item__name">
                   Обо всём
-                </div>
+                </h3>
                 <div class="podcast__item__author">
                   Пётр Дмитриевский
                 </div>
@@ -519,7 +704,7 @@
               </a>
             </div>
             <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
@@ -527,7 +712,7 @@
                 </svg>
                 64
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
@@ -536,7 +721,7 @@
 
                 30
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
@@ -548,17 +733,20 @@
             </div>
           </div>
         </li>
-        <li class="podcast__list-item">
-          <img src="/img/item-6__podcast.jpg" alt="">
+        <li class="podcast__list-item off-list">
+          <picture>
+            <source srcset="/img/item4_mobile.jpg" media="(max-width:446px)">
+            <img src="/img/item-6__podcast.jpg" alt="">
+          </picture>
           <div class="podcast__list-item__content">
             <div class="podcast__item__content-up">
               <div class="podcast__item__info">
                 <span class="podcast__item__time">
                   9:15
                 </span>
-                <div class="podcast__item__name">
+                <h3 class="podcast__item__name">
                   Физика цвета
-                </div>
+                </h3>
                 <div class="podcast__item__author">
                   Татьяна Флеганова
                 </div>
@@ -581,7 +769,7 @@
               </a>
             </div>
             <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
@@ -589,7 +777,7 @@
                 </svg>
                 58
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
@@ -598,7 +786,7 @@
 
                 29
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
@@ -610,17 +798,20 @@
             </div>
           </div>
         </li>
-        <li class="podcast__list-item">
-          <img src="/img/item-7__podcast.jpg" alt="">
+        <li class="podcast__list-item off-list">
+          <picture>
+            <source srcset="/img/item4_mobile.jpg" media="(max-width:446px)">
+            <img src="/img/item-7__podcast.jpg" alt="">
+          </picture>
           <div class="podcast__list-item__content">
             <div class="podcast__item__content-up">
               <div class="podcast__item__info">
                 <span class="podcast__item__time">
                   16:04
                 </span>
-                <div class="podcast__item__name">
+                <h3 class="podcast__item__name">
                   Источник звука
-                </div>
+                </h3>
                 <div class="podcast__item__author">
                   Пётр Дмитриевский
                 </div>
@@ -643,7 +834,7 @@
               </a>
             </div>
             <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
@@ -651,7 +842,7 @@
                 </svg>
                 55
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
@@ -660,7 +851,7 @@
 
                 20
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
@@ -672,17 +863,20 @@
             </div>
           </div>
         </li>
-        <li class="podcast__list-item">
-          <img src="/img/item-8__podcast.jpg" alt="">
+        <li class="podcast__list-item off-list">
+          <picture>
+            <source srcset="/img/item4_mobile.jpg" media="(max-width:446px)">
+            <img src="/img/item-8__podcast.jpg" alt="">
+          </picture>
           <div class="podcast__list-item__content">
             <div class="podcast__item__content-up">
               <div class="podcast__item__info">
                 <span class="podcast__item__time">
                   6:55
                 </span>
-                <div class="podcast__item__name">
+                <h3 class="podcast__item__name">
                   Правила этикета
-                </div>
+                </h3>
                 <div class="podcast__item__author">
                   Татьяна Флеганова
                 </div>
@@ -705,7 +899,7 @@
               </a>
             </div>
             <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
@@ -713,7 +907,7 @@
                 </svg>
                 24
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
@@ -722,7 +916,7 @@
 
                 54
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
@@ -734,145 +928,22 @@
             </div>
           </div>
         </li>
-      </ul>
-      <ul class="podcast__list" id="list-8">
-        <li class="podcast__list-item">
-          <img src="/img/item1_mobile.jpg" alt="">
+        <li class="podcast__list-item off-list off-list-1" >
+          <picture>
+            <source srcset="/img/item4_mobile.jpg" media="(max-width:446px)">
+            <img src="/img/item-8__podcast.jpg" alt="">
+          </picture>
           <div class="podcast__list-item__content">
             <div class="podcast__item__content-up">
               <div class="podcast__item__info">
                 <span class="podcast__item__time">
-                  15:43
+                  6:55
                 </span>
-                <div class="podcast__item__name">
-                  Европа. XIX век
-                </div>
+                <h3 class="podcast__item__name">
+                  Правила этикета
+                </h3>
                 <div class="podcast__item__author">
-                  Дмитрий Гутенберг
-                </div>
-              </div>
-
-              <a href="##" class="podcast__item__play">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
-                  <path
-                    d="M21.6924 31.7965L31.5716 24.7996C32.1428 24.3998 32.1428 23.6002 31.5716 23.2004L21.6924 16.2035C20.9943 15.7037 20 16.1835 20 17.0031V30.9969C20 31.8165 20.9943 32.2963 21.6924 31.7965Z"
-                    fill="#A1A6B4" />
-                </svg>
-              </a>
-              <a href="##" class="podcast__item__pause off">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
-                  <rect x="19" y="15" width="2" height="18" rx="1" fill="#A1A6B4" />
-                  <rect x="27" y="15" width="2" height="18" rx="1" fill="#A1A6B4" />
-                </svg>
-              </a>
-            </div>
-            <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
-                <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
-                    fill="#A1A6B4" />
-                </svg>
-                258
-              </a>
-              <a href="##" class="podcast__item__conten-down__link">
-                <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
-                    fill="#A1A6B4" />
-                </svg>
-
-                104
-              </a>
-              <a href="##" class="podcast__item__conten-down__link">
-                <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
-                    fill="#A1A6B4" />
-                </svg>
-
-                68
-              </a>
-            </div>
-          </div>
-        </li>
-        <li class="podcast__list-item">
-          <img src="/img/item2_mobile.jpg" alt="">
-          <div class="podcast__list-item__content">
-            <div class="podcast__item__content-up">
-              <div class="podcast__item__info">
-                <span class="podcast__item__time">
-                  5:32
-                </span>
-                <div class="podcast__item__name">
-                  О музыке
-                </div>
-                <div class="podcast__item__author">
-                  Дмитрий Гутенберг
-                </div>
-              </div>
-
-              <a href="##" class="podcast__item__play">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
-                  <path
-                    d="M21.6924 31.7965L31.5716 24.7996C32.1428 24.3998 32.1428 23.6002 31.5716 23.2004L21.6924 16.2035C20.9943 15.7037 20 16.1835 20 17.0031V30.9969C20 31.8165 20.9943 32.2963 21.6924 31.7965Z"
-                    fill="#A1A6B4" />
-                </svg>
-              </a>
-              <a href="##" class="podcast__item__pause off">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
-                  <rect x="19" y="15" width="2" height="18" rx="1" fill="#A1A6B4" />
-                  <rect x="27" y="15" width="2" height="18" rx="1" fill="#A1A6B4" />
-                </svg>
-              </a>
-            </div>
-            <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
-                <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
-                    fill="#A1A6B4" />
-                </svg>
-                207
-              </a>
-              <a href="##" class="podcast__item__conten-down__link">
-                <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
-                    fill="#A1A6B4" />
-                </svg>
-
-                34
-              </a>
-              <a href="##" class="podcast__item__conten-down__link">
-                <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
-                    fill="#A1A6B4" />
-                </svg>
-
-                18
-              </a>
-            </div>
-          </div>
-        </li>
-        <li class="podcast__list-item">
-          <img src="/img/item3_mobile.jpg" alt="">
-          <div class="podcast__list-item__content">
-            <div class="podcast__item__content-up">
-              <div class="podcast__item__info">
-                <span class="podcast__item__time">
-                  8:54
-                </span>
-                <div class="podcast__item__name">
-                  Люди сегодня
-                </div>
-                <div class="podcast__item__author">
-                  Анна Васильева
+                  Татьяна Флеганова
                 </div>
               </div>
 
@@ -893,15 +964,15 @@
               </a>
             </div>
             <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
                     fill="#A1A6B4" />
                 </svg>
-                104
+                24
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
@@ -910,7 +981,7 @@
 
                 54
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
@@ -922,19 +993,22 @@
             </div>
           </div>
         </li>
-        <li class="podcast__list-item">
-          <img src="/img/item4_mobile.jpg" alt="">
+        <li class="podcast__list-item off-list off-list-1" >
+          <picture>
+            <source srcset="/img/item4_mobile.jpg" media="(max-width:446px)">
+            <img src="/img/item-8__podcast.jpg" alt="">
+          </picture>
           <div class="podcast__list-item__content">
             <div class="podcast__item__content-up">
               <div class="podcast__item__info">
                 <span class="podcast__item__time">
-                  9:04
+                  6:55
                 </span>
-                <div class="podcast__item__name">
-                  Хэллоу, Африка!
-                </div>
+                <h3 class="podcast__item__name">
+                  Правила этикета
+                </h3>
                 <div class="podcast__item__author">
-                  Пётр Дмитриевский
+                  Татьяна Флеганова
                 </div>
               </div>
 
@@ -955,45 +1029,45 @@
               </a>
             </div>
             <div class="podcast__item__content-down">
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M1.3 11.331L8.29606 6.5L1.3 1.66897V11.331ZM0.666238 1.23131L0.669532 1.23361L0.666238 1.23131ZM1.41031 12.8347L9.64301 7.14971C10.119 6.82485 10.119 6.17514 9.64301 5.85029L1.41031 0.165315C0.828559 -0.240754 0 0.149072 0 0.815026V12.185C0 12.8509 0.828559 13.2408 1.41031 12.8347Z"
                     fill="#A1A6B4" />
                 </svg>
-                87
+                24
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9.425 0C8.294 0 7.2085 0.5297 6.5 1.36676C5.7915 0.5297 4.706 0 3.575 0C1.573 0 0 1.58256 0 3.59673C0 6.06866 2.21 8.08283 5.5575 11.1433L6.5 12L7.4425 11.1368C10.79 8.08283 13 6.06866 13 3.59673C13 1.58256 11.427 0 9.425 0ZM6.565 10.1689L6.5 10.2343L6.435 10.1689C3.341 7.35041 1.3 5.48665 1.3 3.59673C1.3 2.28883 2.275 1.3079 3.575 1.3079C4.576 1.3079 5.551 1.95531 5.8955 2.85123H7.111C7.449 1.95531 8.424 1.3079 9.425 1.3079C10.725 1.3079 11.7 2.28883 11.7 3.59673C11.7 5.48665 9.659 7.35041 6.565 10.1689Z"
                     fill="#A1A6B4" />
                 </svg>
 
-                44
+                54
               </a>
-              <a href="##" class="podcast__item__conten-down__link">
+              <a href="#" class="podcast__item__conten-down__link">
                 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10 9.18876C9.49333 9.18876 9.04 9.38454 8.69333 9.69127L3.94 6.98293C3.97333 6.83283 4 6.68273 4 6.5261C4 6.36948 3.97333 6.21938 3.94 6.06928L8.64 3.38705C9 3.71335 9.47333 3.91566 10 3.91566C11.1067 3.91566 12 3.04116 12 1.95783C12 0.874498 11.1067 0 10 0C8.89333 0 8 0.874498 8 1.95783C8 2.11446 8.02667 2.26456 8.06 2.41466L3.36 5.09689C3 4.77058 2.52667 4.56827 2 4.56827C0.893333 4.56827 0 5.44277 0 6.5261C0 7.60944 0.893333 8.48394 2 8.48394C2.52667 8.48394 3 8.28163 3.36 7.95532L8.10667 10.6702C8.07333 10.8072 8.05333 10.9508 8.05333 11.0944C8.05333 12.1451 8.92667 13 10 13C11.0733 13 11.9467 12.1451 11.9467 11.0944C11.9467 10.0437 11.0733 9.18876 10 9.18876ZM10 1.30522C10.3667 1.30522 10.6667 1.5989 10.6667 1.95783C10.6667 2.31677 10.3667 2.61044 10 2.61044C9.63333 2.61044 9.33333 2.31677 9.33333 1.95783C9.33333 1.5989 9.63333 1.30522 10 1.30522ZM2 7.17871C1.63333 7.17871 1.33333 6.88504 1.33333 6.5261C1.33333 6.16717 1.63333 5.87349 2 5.87349C2.36667 5.87349 2.66667 6.16717 2.66667 6.5261C2.66667 6.88504 2.36667 7.17871 2 7.17871ZM10 11.76C9.63333 11.76 9.33333 11.4664 9.33333 11.1074C9.33333 10.7485 9.63333 10.4548 10 10.4548C10.3667 10.4548 10.6667 10.7485 10.6667 11.1074C10.6667 11.4664 10.3667 11.76 10 11.76Z"
                     fill="#A1A6B4" />
                 </svg>
 
-                5
+                42
               </a>
             </div>
           </div>
         </li>
       </ul>
       <div class="center">
-        <a href="##" class="podcast__link__about">
+        <a href="javascript:void(0)" class="podcast__link__about">
           Еще подкасты
         </a>
       </div>
     </div>
   </section>
 
-  <section class="broadcast">
+  <section class="broadcast" id="broadcast">
     <div class="container broadcast__container">
       <div class="broadcast__left">
         <div class="broadcast__left__top">
@@ -1014,16 +1088,19 @@
         </div>
         <ul class="broadcast__list" id="list-2">
           <li class="broadcast__list__item">
-            <a href="##">
-              <img src="/img/broadcast1.jpg" alt="Фото">
+            <a href="#">
+              <picture>
+                <source srcset="/img/broadcast1.jpg">
+                <img src="/img/broadcast1.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   О людях и книгах
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   Анонсируется отдельно
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="20" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1035,16 +1112,19 @@
             </a>
           </li>
           <li class="broadcast__list__item">
-            <a href="##">
-              <img src="/img/broadcast2.jpg" alt="Фото">
+            <a href="#">
+              <picture>
+                <source srcset="/img/broadcast2.jpg">
+                <img src="/img/broadcast2.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   Графомания td.
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   По понедельникам в 10:00
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="20" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1056,16 +1136,19 @@
             </a>
           </li>
           <li class="broadcast__list__item">
-            <a href="##">
-              <img src="/img/broadcast3.jpg" alt="Фото">
+            <a href="#">
+              <picture>
+                <source srcset="/img/broadcast3.jpg">
+                <img src="/img/broadcast3.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   Не Рим, не Троя
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   По вторникам в 12:00
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="20" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1077,16 +1160,19 @@
             </a>
           </li>
           <li class="broadcast__list__item">
-            <a href="##">
-              <img src="/img/broadcast4.jpg" alt="Фото">
+            <a href="#">
+              <picture>
+                <source srcset="/img/broadcast4.jpg">
+                <img src="/img/broadcast4.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   Эрудит
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   По пятницам в 17:00
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="20" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1098,16 +1184,19 @@
             </a>
           </li>
           <li class="broadcast__list__item">
-            <a href="##">
-              <img src="/img/broadcast5.jpg" alt="Фото">
+            <a href="#">
+              <picture>
+                <source srcset="/img/broadcast5.jpg">
+                <img src="/img/broadcast5.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   Тонкости эпох
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   По субботам в 10:00
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="20" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1119,16 +1208,19 @@
             </a>
           </li>
           <li class="broadcast__list__item">
-            <a href="##">
-              <img src="/img/broadcast6.jpg" alt="Фото">
+            <a href="#">
+              <picture>
+                <source srcset="/img/broadcast6.jpg">
+                <img src="/img/broadcast6.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   Живые мысли
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   По воскресеньям в 15:30
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="20" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1144,7 +1236,7 @@
           <img src="/img/mic1.png" alt="Микрофон" class="mic">
           <br>
           <div class="flex1">
-            <a href="##" class="broadcast__link">
+            <a href="#" class="broadcast__link">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 1.5L1.5 5.25L9 9L16.5 5.25L9 1.5Z" stroke="#121723" stroke-width="1.5"
                   stroke-linecap="round" stroke-linejoin="round" />
@@ -1161,19 +1253,22 @@
           </div>
         </div>
       </div>
-      <div class="brodcast__right">
+      <div class="broadcast__right">
         <ul class="broadcast__list" id="list-1">
           <li class="broadcast__list__item">
-            <a href="##" class="broadcast__list__link">
-              <img src="/img/broadcast1.jpg" alt="Фото">
+            <a href="#" class="broadcast__list__link">
+              <picture>
+                <source srcset="/img/broadcast1.jpg">
+                <img src="/img/broadcast1.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   О людях и книгах
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   Анонсируется отдельно
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1185,16 +1280,19 @@
             </a>
           </li>
           <li class="broadcast__list__item">
-            <a href="##">
-              <img src="/img/broadcast2.jpg" alt="Фото">
+            <a href="#">
+              <picture>
+                <source srcset="/img/broadcast2.jpg">
+                <img src="/img/broadcast2.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   Графомания td.
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   По понедельникам в 10:00
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1206,16 +1304,19 @@
             </a>
           </li>
           <li class="broadcast__list__item">
-            <a href="##">
-              <img src="/img/broadcast3.jpg" alt="Фото">
+            <a href="#">
+              <picture>
+                <source srcset="/img/broadcast3.jpg">
+                <img src="/img/broadcast3.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   Не Рим, не Троя
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   По вторникам в 12:00
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1227,16 +1328,19 @@
             </a>
           </li>
           <li class="broadcast__list__item">
-            <a href="##">
-              <img src="/img/broadcast4.jpg" alt="Фото">
+            <a href="#">
+              <picture>
+                <source srcset="/img/broadcast4.jpg">
+                <img src="/img/broadcast4.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   Эрудит
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   По пятницам в 17:00
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1248,16 +1352,19 @@
             </a>
           </li>
           <li class="broadcast__list__item">
-            <a href="##">
-              <img src="/img/broadcast5.jpg" alt="Фото">
+            <a href="#">
+              <picture>
+                <source srcset="/img/broadcast5.jpg">
+                <img src="/img/broadcast5.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   Тонкости эпох
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   По субботам в 10:00
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1269,16 +1376,19 @@
             </a>
           </li>
           <li class="broadcast__list__item">
-            <a href="##">
-              <img src="/img/broadcast6.jpg" alt="Фото">
+            <a href="#">
+              <picture>
+                <source srcset="/img/broadcast6.jpg">
+                <img src="/img/broadcast6.jpg" alt="Фото">
+              </picture>
               <div class="broadcast__info">
-                <div class="broadcast__list__item__about">
+                <h3 class="broadcast__list__item__about">
                   Живые мысли
-                </div>
+                </h3>
                 <div class="broadcast__list__item__prem">
                   По воскресеньям в 15:30
                 </div>
-                <div href="##" class="broadcast__list__item__link">
+                <div class="broadcast__list__item__link">
                   Подробнее
                   <svg width="21" height="8" viewBox="0 0 21 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -1294,12 +1404,12 @@
     </div>
   </section>
 
-  <section class="guest">
+  <section class="guest" id="guest">
     <div class="container">
       <h2 class="guest__title">
         Гости
       </h2>
-      <div class="quest__text">
+      <div class="guest__text">
         У нас бывают:
       </div>
       <div class="guest__info">
@@ -1309,7 +1419,7 @@
       <div class="guest__variant">
         <ul class="guest__list" id="accordion">
           <li class="guest__list-item">
-            <a href="##" class="guest__list__link">
+            <a href="#" class="guest__list__link">
               Блогеры
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
@@ -1317,63 +1427,55 @@
               </svg>
             </a>
             <div class="guest__list__item-content">
-              <div class="block1">
-                <button href="##" class="guest__list__item__human">
-                  Сергей Денисов
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Матвей Мечников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Константин Прусино
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Иван Калитников
-                </button>
-              </div>
-              <div class="block2">
-                <button href="##" class="guest__list__item__human">
-                  Евгений Войновский
-                </button>
-                <button href="##" class="guest__list__item__human active-s">
-                  Ольга Мартынова
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Дмитрий Михалок
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Пётр Пиотровский
-                </button>
-              </div>
-              <div class="block3">
-                <button href="##" class="guest__list__item__human">
-                  Олег Свиридовский
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Владислав Кауперс
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Михаил Пожитников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Георгий Полуян
-                </button>
-              </div>
-              <div class="block4">
-                <button href="##" class="guest__list__item__human">
-                  Денис Тельман
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Юрий Горин
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Максим Сергеев
-                </button>
-              </div>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Сергей Денисов
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Евгений Войновский
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Олег Свиридовский
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Денис Тельман
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Матвей Мечников
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="one">
+                Ольга Мартынова
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Владислав Кауперс
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Юрий Горин
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Константин Прусино
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Дмитрий Михалок
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Михаил Пожитников
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Максим Сергеев
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Иван Калитников
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Пётр Пиотровский
+              </a>
+              <a href="javascript:void(0)" class="guest__list__item__human" data-path="two">
+                Георгий Полуян
+              </a>
             </div>
           </li>
           <li class="guest__list-item">
-            <a href="##" class="guest__list__link">
+            <a href="#" class="guest__list__link">
               Арт-критики
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
@@ -1381,63 +1483,55 @@
               </svg>
             </a>
             <div class="guest__list__item-content">
-              <div class="block1">
-                <button href="##" class="guest__list__item__human">
-                  Сергей Денисов
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Матвей Мечников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Константин Прусино
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Иван Калитников
-                </button>
-              </div>
-              <div class="block2">
-                <button href="##" class="guest__list__item__human">
-                  Евгений Войновский
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Ольга Мартынова
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Дмитрий Михалок
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Пётр Пиотровский
-                </button>
-              </div>
-              <div class="block3">
-                <button href="##" class="guest__list__item__human">
-                  Олег Свиридовский
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Владислав Кауперс
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Михаил Пожитников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Георгий Полуян
-                </button>
-              </div>
-              <div class="block4">
-                <button href="##" class="guest__list__item__human">
-                  Денис Тельман
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Юрий Горин
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Максим Сергеев
-                </button>
-              </div>
+              <a href="#" class="guest__list__item__human">
+                Сергей Денисов
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Евгений Войновский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Олег Свиридовский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Денис Тельман
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Матвей Мечников
+              </a>
+              <a href="#" class="guest__list__item__human active-s">
+                Ольга Мартынова
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Владислав Кауперс
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Юрий Горин
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Константин Прусино
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Дмитрий Михалок
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Михаил Пожитников
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Максим Сергеев
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Иван Калитников
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Пётр Пиотровский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Георгий Полуян
+              </a>
             </div>
           </li>
           <li class="guest__list-item">
-            <a href="##" class="guest__list__link">
+            <a href="#" class="guest__list__link">
               Художники
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
@@ -1445,63 +1539,55 @@
               </svg>
             </a>
             <div class="guest__list__item-content">
-              <div class="block1">
-                <button href="##" class="guest__list__item__human">
-                  Сергей Денисов
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Матвей Мечников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Константин Прусино
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Иван Калитников
-                </button>
-              </div>
-              <div class="block2">
-                <button href="##" class="guest__list__item__human">
-                  Евгений Войновский
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Ольга Мартынова
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Дмитрий Михалок
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Пётр Пиотровский
-                </button>
-              </div>
-              <div class="block3">
-                <button href="##" class="guest__list__item__human">
-                  Олег Свиридовский
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Владислав Кауперс
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Михаил Пожитников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Георгий Полуян
-                </button>
-              </div>
-              <div class="block4">
-                <button href="##" class="guest__list__item__human">
-                  Денис Тельман
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Юрий Горин
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Максим Сергеев
-                </button>
-              </div>
+              <a href="#" class="guest__list__item__human">
+                Сергей Денисов
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Евгений Войновский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Олег Свиридовский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Денис Тельман
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Матвей Мечников
+              </a>
+              <a href="#" class="guest__list__item__human active-s">
+                Ольга Мартынова
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Владислав Кауперс
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Юрий Горин
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Константин Прусино
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Дмитрий Михалок
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Михаил Пожитников
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Максим Сергеев
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Иван Калитников
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Пётр Пиотровский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Георгий Полуян
+              </a>
             </div>
           </li>
           <li class="guest__list-item">
-            <a href="##" class="guest__list__link">
+            <a href="#" class="guest__list__link">
               Люди науки
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
@@ -1509,63 +1595,55 @@
               </svg>
             </a>
             <div class="guest__list__item-content">
-              <div class="block1">
-                <button href="##" class="guest__list__item__human">
-                  Сергей Денисов
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Матвей Мечников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Константин Прусино
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Иван Калитников
-                </button>
-              </div>
-              <div class="block2">
-                <button href="##" class="guest__list__item__human">
-                  Евгений Войновский
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Ольга Мартынова
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Дмитрий Михалок
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Пётр Пиотровский
-                </button>
-              </div>
-              <div class="block3">
-                <button href="##" class="guest__list__item__human">
-                  Олег Свиридовский
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Владислав Кауперс
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Михаил Пожитников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Георгий Полуян
-                </button>
-              </div>
-              <div class="block4">
-                <button href="##" class="guest__list__item__human">
-                  Денис Тельман
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Юрий Горин
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Максим Сергеев
-                </button>
-              </div>
+              <a href="#" class="guest__list__item__human">
+                Сергей Денисов
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Евгений Войновский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Олег Свиридовский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Денис Тельман
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Матвей Мечников
+              </a>
+              <a href="#" class="guest__list__item__human active-s">
+                Ольга Мартынова
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Владислав Кауперс
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Юрий Горин
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Константин Прусино
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Дмитрий Михалок
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Михаил Пожитников
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Максим Сергеев
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Иван Калитников
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Пётр Пиотровский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Георгий Полуян
+              </a>
             </div>
           </li>
           <li class="guest__list-item">
-            <a href="##" class="guest__list__link">
+            <a href="#" class="guest__list__link">
               Историки
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
@@ -1573,63 +1651,55 @@
               </svg>
             </a>
             <div class="guest__list__item-content">
-              <div class="block1">
-                <button href="##" class="guest__list__item__human">
-                  Сергей Денисов
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Матвей Мечников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Константин Прусино
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Иван Калитников
-                </button>
-              </div>
-              <div class="block2">
-                <button href="##" class="guest__list__item__human">
-                  Евгений Войновский
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Ольга Мартынова
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Дмитрий Михалок
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Пётр Пиотровский
-                </button>
-              </div>
-              <div class="block3">
-                <button href="##" class="guest__list__item__human">
-                  Олег Свиридовский
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Владислав Кауперс
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Михаил Пожитников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Георгий Полуян
-                </button>
-              </div>
-              <div class="block4">
-                <button href="##" class="guest__list__item__human">
-                  Денис Тельман
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Юрий Горин
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Максим Сергеев
-                </button>
-              </div>
+              <a href="#" class="guest__list__item__human">
+                Сергей Денисов
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Евгений Войновский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Олег Свиридовский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Денис Тельман
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Матвей Мечников
+              </a>
+              <a href="#" class="guest__list__item__human active-s">
+                Ольга Мартынова
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Владислав Кауперс
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Юрий Горин
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Константин Прусино
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Дмитрий Михалок
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Михаил Пожитников
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Максим Сергеев
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Иван Калитников
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Пётр Пиотровский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Георгий Полуян
+              </a>
             </div>
           </li>
           <li class="guest__list-item">
-            <a href="##" class="guest__list__link">
+            <a href="#" class="guest__list__link">
               Филологи
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="24" cy="24" r="20" stroke="#A1A6B4" stroke-width="2" />
@@ -1637,68 +1707,63 @@
               </svg>
             </a>
             <div class="guest__list__item-content">
-              <div class="block1">
-                <button href="##" class="guest__list__item__human">
-                  Сергей Денисов
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Матвей Мечников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Константин Прусино
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Иван Калитников
-                </button>
-              </div>
-              <div class="block2">
-                <button href="##" class="guest__list__item__human">
-                  Евгений Войновский
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Ольга Мартынова
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Дмитрий Михалок
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Пётр Пиотровский
-                </button>
-              </div>
-              <div class="block3">
-                <button href="##" class="guest__list__item__human">
-                  Олег Свиридовский
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Владислав Кауперс
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Михаил Пожитников
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Георгий Полуян
-                </button>
-              </div>
-              <div class="block4">
-                <button href="##" class="guest__list__item__human">
-                  Денис Тельман
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Юрий Горин
-                </button>
-                <button href="##" class="guest__list__item__human">
-                  Максим Сергеев
-                </button>
-              </div>
+              <a href="#" class="guest__list__item__human">
+                Сергей Денисов
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Евгений Войновский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Олег Свиридовский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Денис Тельман
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Матвей Мечников
+              </a>
+              <a href="#" class="guest__list__item__human active-s">
+                Ольга Мартынова
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Владислав Кауперс
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Юрий Горин
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Константин Прусино
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Дмитрий Михалок
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Михаил Пожитников
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Максим Сергеев
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Иван Калитников
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Пётр Пиотровский
+              </a>
+              <a href="#" class="guest__list__item__human">
+                Георгий Полуян
+              </a>
             </div>
           </li>
         </ul>
 
-        <div class="guest__who">
-          <img src="/img/olga.jpg" alt="">
+        <div class="guest__who" data-target="one">
+          <picture>
+            <source srcset="/img/olga__1.jpg" media="(max-width: 900px)">
+            <img src="/img/olga.jpg" alt="">
+          </picture>
           <ul class="guest__social">
             <li class="guest__social__list">
-              <a href="##" class="guest__social__list-link">
+              <a href="#" class="guest__social__list-link">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10 0C12.717 0 13.056 0.00999994 14.122 0.0599999C15.187 0.11 15.912 0.277 16.55 0.525C17.21 0.779 17.766 1.123 18.322 1.678C18.8305 2.1779 19.224 2.78259 19.475 3.45C19.722 4.087 19.89 4.813 19.94 5.878C19.987 6.944 20 7.283 20 10C20 12.717 19.99 13.056 19.94 14.122C19.89 15.187 19.722 15.912 19.475 16.55C19.2247 17.2178 18.8311 17.8226 18.322 18.322C17.822 18.8303 17.2173 19.2238 16.55 19.475C15.913 19.722 15.187 19.89 14.122 19.94C13.056 19.987 12.717 20 10 20C7.283 20 6.944 19.99 5.878 19.94C4.813 19.89 4.088 19.722 3.45 19.475C2.78233 19.2245 2.17753 18.8309 1.678 18.322C1.16941 17.8222 0.775931 17.2175 0.525 16.55C0.277 15.913 0.11 15.187 0.0599999 14.122C0.0129999 13.056 0 12.717 0 10C0 7.283 0.00999994 6.944 0.0599999 5.878C0.11 4.812 0.277 4.088 0.525 3.45C0.775236 2.78218 1.1688 2.17732 1.678 1.678C2.17767 1.16923 2.78243 0.775729 3.45 0.525C4.088 0.277 4.812 0.11 5.878 0.0599999C6.944 0.0129999 7.283 0 10 0ZM10 5C8.67392 5 7.40215 5.52678 6.46447 6.46447C5.52678 7.40215 5 8.67392 5 10C5 11.3261 5.52678 12.5979 6.46447 13.5355C7.40215 14.4732 8.67392 15 10 15C11.3261 15 12.5979 14.4732 13.5355 13.5355C14.4732 12.5979 15 11.3261 15 10C15 8.67392 14.4732 7.40215 13.5355 6.46447C12.5979 5.52678 11.3261 5 10 5ZM16.5 4.75C16.5 4.41848 16.3683 4.10054 16.1339 3.86612C15.8995 3.6317 15.5815 3.5 15.25 3.5C14.9185 3.5 14.6005 3.6317 14.3661 3.86612C14.1317 4.10054 14 4.41848 14 4.75C14 5.08152 14.1317 5.39946 14.3661 5.63388C14.6005 5.8683 14.9185 6 15.25 6C15.5815 6 15.8995 5.8683 16.1339 5.63388C16.3683 5.39946 16.5 5.08152 16.5 4.75ZM10 7C10.7956 7 11.5587 7.31607 12.1213 7.87868C12.6839 8.44129 13 9.20435 13 10C13 10.7956 12.6839 11.5587 12.1213 12.1213C11.5587 12.6839 10.7956 13 10 13C9.20435 13 8.44129 12.6839 7.87868 12.1213C7.31607 11.5587 7 10.7956 7 10C7 9.20435 7.31607 8.44129 7.87868 7.87868C8.44129 7.31607 9.20435 7 10 7Z"
@@ -1707,7 +1772,7 @@
               </a>
             </li>
             <li class="guest__social__list">
-              <a href="##" class="guest__social__list-link">
+              <a href="#" class="guest__social__list-link">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M13.78 20V12.26H16.3722L16.76 9.25111H13.78V7.33111C13.78 6.46 14.0222 5.86556 15.2711 5.86556H16.8644V3.17444C16.0931 3.09261 15.3179 3.05292 14.5422 3.05556C12.2456 3.05556 10.6733 4.45778 10.6733 7.03333V9.25111H8.07556V12.26H10.6733V20H1.11111C0.816426 20 0.533811 19.8829 0.325437 19.6746C0.117063 19.4662 0 19.1836 0 18.8889V1.11111C0 0.816426 0.117063 0.533811 0.325437 0.325437C0.533811 0.117063 0.816426 0 1.11111 0H18.8889C19.1836 0 19.4662 0.117063 19.6746 0.325437C19.8829 0.533811 20 0.816426 20 1.11111V18.8889C20 19.1836 19.8829 19.4662 19.6746 19.6746C19.4662 19.8829 19.1836 20 18.8889 20H13.78Z"
@@ -1716,7 +1781,7 @@
               </a>
             </li>
             <li class="guest__social__list">
-              <a href="##" class="guest__social__list-link">
+              <a href="#" class="guest__social__list-link">
                 <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M21.1621 2.65593C20.3986 2.99362 19.589 3.2154 18.7601 3.31393C19.6338 2.79136 20.2878 1.96894 20.6001 0.999927C19.7801 1.48793 18.8811 1.82993 17.9441 2.01493C17.3147 1.34151 16.4804 0.89489 15.571 0.744511C14.6616 0.594133 13.728 0.748418 12.9153 1.18338C12.1026 1.61834 11.4564 2.30961 11.0772 3.14972C10.6979 3.98983 10.6068 4.93171 10.8181 5.82893C9.15516 5.74558 7.52838 5.31345 6.04334 4.56059C4.55829 3.80773 3.24818 2.75097 2.19805 1.45893C1.82634 2.09738 1.63101 2.82315 1.63205 3.56193C1.63205 5.01193 2.37005 6.29293 3.49205 7.04293C2.82806 7.02202 2.17869 6.84271 1.59805 6.51993V6.57193C1.59825 7.53763 1.93242 8.47354 2.5439 9.22099C3.15538 9.96843 4.00653 10.4814 4.95305 10.6729C4.33667 10.84 3.69036 10.8646 3.06305 10.7449C3.32992 11.5762 3.85006 12.3031 4.55064 12.824C5.25123 13.3449 6.09718 13.6337 6.97005 13.6499C6.10253 14.3313 5.10923 14.8349 4.04693 15.1321C2.98464 15.4293 1.87418 15.5142 0.779053 15.3819C2.69075 16.6114 4.91615 17.264 7.18905 17.2619C14.8821 17.2619 19.0891 10.8889 19.0891 5.36193C19.0891 5.18193 19.0841 4.99993 19.0761 4.82193C19.8949 4.23009 20.6017 3.49695 21.1631 2.65693L21.1621 2.65593Z"
@@ -1732,19 +1797,22 @@
             Российский искусствовед, арт-критик, куратор выставок, дизайнер, кандидат культурологии. Арт-критик газеты
             «Коммерсантъ». Ведёт активную блогерскую деятельность как куратор музея «Гараж», коим является с 2016 года.
           </div>
-          <a href="##" class="guest__who__link">
+          <a href="#" class="guest__who__link">
             Эфиры с гостем
           </a>
         </div>
 
-        <div class="guest__noname off">
-          <img src="/img/noname.jpg" alt="">
+        <div class="guest__who guest__active" data-target="two">
+          <picture>
+            <source srcset="/img/noname__1.jpg" media="(max-width: 900px)">
+            <img src="/img/noname.jpg" alt="">
+          </picture>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="music">
+  <section class="music" id="music">
     <div class="container music__container">
       <div class="music__left">
         <h2 class="music__title">
@@ -1754,76 +1822,58 @@
           Жанр
         </div>
         <ul class="music__genre__list" id="list-9">
-          <div class="block1">
-            <li class="music__genre__list-item">
-              <input type="radio" name="radio" id="custom-radio" class="custom-radio">
-              <label for="custom-radio">
-                Постпанк
-              </label>
-            </li>
-            <li class="music__genre__list-item">
-              <input type="radio" name="radio" id="custom-radio1" class="custom-radio">
-              <label for="custom-radio1">
-                Хардкор
-              </label>
-            </li>
-            <li class="music__genre__list-item">
-              <input type="radio" name="radio" id="custom-radio2" class="custom-radio">
-              <label for="custom-radio2">
-                Панк-рок
-              </label>
-            </li>
-            <li class="music__genre__list-item">
-              <input type="radio" name="radio" id="custom-radio3" class="custom-radio">
-              <label for="custom-radio3">
-                Рок
-              </label>
-            </li>
-          </div>
-          <div class="block2">
-            <li class="music__genre__list-item">
-              <input type="radio" name="radio" id="custom-radio4" class="custom-radio">
-              <label for="custom-radio4">
-                Прогрессивный рок
-              </label>
-            </li>
-            <li class="music__genre__list-item">
-              <input type="radio" name="radio" id="custom-radio5" class="custom-radio">
-              <label for="custom-radio5">
-                Электронная музыка
-              </label>
-            </li>
-            <li class="music__genre__list-item">
-              <input type="radio" name="radio" id="custom-radio6" class="custom-radio">
-              <label for="custom-radio6">
-                Классическая музыка
-              </label>
-            </li>
-            <li class="music__genre__list-item">
-              <input type="radio" name="radio" id="custom-radio7" class="custom-radio">
-              <label for="custom-radio7">
-                Звуки природы и шум города
-              </label>
-            </li>
-          </div>
+          <li class="music__genre__list-item">
+            <input type="radio" name="radio" id="custom-radio" class="custom-radio">
+            <label for="custom-radio">
+              Постпанк
+            </label>
+          </li>
+          <li class="music__genre__list-item">
+            <input type="radio" name="radio" id="custom-radio1" class="custom-radio">
+            <label for="custom-radio1">
+              Хардкор
+            </label>
+          </li>
+          <li class="music__genre__list-item">
+            <input type="radio" name="radio" id="custom-radio2" class="custom-radio">
+            <label for="custom-radio2">
+              Панк-рок
+            </label>
+          </li>
+          <li class="music__genre__list-item">
+            <input type="radio" name="radio" id="custom-radio3" class="custom-radio">
+            <label for="custom-radio3">
+              Рок
+            </label>
+          </li>
+          <li class="music__genre__list-item">
+            <input type="radio" name="radio" id="custom-radio4" class="custom-radio">
+            <label for="custom-radio4">
+              Прогрессивный рок
+            </label>
+          </li>
+          <li class="music__genre__list-item">
+            <input type="radio" name="radio" id="custom-radio5" class="custom-radio">
+            <label for="custom-radio5">
+              Электронная музыка
+            </label>
+          </li>
+          <li class="music__genre__list-item">
+            <input type="radio" name="radio" id="custom-radio6" class="custom-radio">
+            <label for="custom-radio6">
+              Классическая музыка
+            </label>
+          </li>
+          <li class="music__genre__list-item">
+            <input type="radio" name="radio" id="custom-radio7" class="custom-radio">
+            <label for="custom-radio7">
+              Звуки природы и шум города
+            </label>
+          </li>
         </ul>
-
-        <div class="swiper music__genre__list-swiper">
-          <div class="swiper-wrapper">
-            <a href="##" class="swiper-slide  music__genre__list-swiper__item ">Постпанк</a>
-            <a href="##" class="swiper-slide music__genre__list-swiper__item ">Хардкор</a>
-            <a href="##" class="swiper-slide music__genre__list-swiper__item  ">Панк-рок</a>
-            <a href="##" class="swiper-slide music__genre__list-swiper__item ">Рок</a>
-            <a href="##" class="swiper-slide  music__genre__list-swiper__item ">Прогресс</a>
-            <a href="##" class="swiper-slide music__genre__list-swiper__item ">Электронная</a>
-            <a href="##" class="swiper-slide music__genre__list-swiper__item  ">Классическая</a>
-            <a href="##" class="swiper-slide music__genre__list-swiper__item ">Природа</a>
-          </div>
-        </div>
-
         <ul class="music__artist__list" id="list-4">
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -1834,20 +1884,23 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/russia.png" alt="" class="country">
-                <img src="/img/artist1.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist1.jpg">
+                  <img src="/img/artist1.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Ploho
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   3 последних альбома
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -1858,20 +1911,23 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/russia.png" alt="" class="country">
-                <img src="/img/artist2.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist2.jpg">
+                  <img src="/img/artist2.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Molchat Doma
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Все песни
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -1882,20 +1938,23 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/russia.png" alt="" class="country">
-                <img src="/img/artist3.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist3.jpg">
+                  <img src="/img/artist3.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Motorama
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Все синглы
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -1906,20 +1965,23 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/russia.png" alt="" class="country">
-                <img src="/img/artist4.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist4.jpg">
+                  <img src="/img/artist4.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Human Tetris
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   3 последних альбома
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -1930,20 +1992,23 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/russia.png" alt="" class="country">
-                <img src="/img/artist5.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist5.jpg">
+                  <img src="/img/artist5.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Буерак
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Все EP
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -1954,20 +2019,23 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/russia.png" alt="" class="country">
-                <img src="/img/artist6.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist6.jpg">
+                  <img src="/img/artist6.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Июльские Дни
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Альбом «Колокол»
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -1978,20 +2046,23 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/england.png" alt="" class="country">
-                <img src="/img/artist7.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist7.jpg">
+                  <img src="/img/artist7.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Joy Division
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Лучшее за всё время
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2002,20 +2073,23 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/england.png" alt="" class="country">
-                <img src="/img/artist8.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist8.jpg">
+                  <img src="/img/artist8.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   The Cure
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Лучшее за всё время
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2026,20 +2100,23 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/england.png" alt="" class="country">
-                <img src="/img/artist9.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist9.jpg">
+                  <img src="/img/artist9.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   The Smiths
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Период 1984-1988
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2050,20 +2127,23 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/england.png" alt="" class="country">
-                <img src="/img/artist10.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist10.jpg">
+                  <img src="/img/artist10.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   New Order
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Хиты
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2074,20 +2154,23 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/england.png" alt="" class="country">
-                <img src="/img/artist11.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist11.jpg">
+                  <img src="/img/artist11.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Bauhaus
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Все синглы
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##">
+            <a href="#">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2098,13 +2181,16 @@
               </div>
               <div class="music__artist__list-item__img">
                 <img src="/img/england.png" alt="" class="country">
-                <img src="/img/artist12.jpg" alt="">
+                <picture>
+                  <source srcset="/img/artist12.jpg">
+                  <img src="/img/artist12.jpg" alt="">
+                </picture>
               </div>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Gang Of Four
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   3 последних альбома
                 </div>
               </div>
@@ -2126,7 +2212,7 @@
       <div class="music__right">
         <ul class="music__artist__list" id="list-3">
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2136,19 +2222,22 @@
                 </svg>
               </div>
               <img src="/img/russia.png" alt="" class="country">
-              <img src="/img/artist1.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist1.jpg">
+                <img src="/img/artist1.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Ploho
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   3 последних альбома
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2158,19 +2247,22 @@
                 </svg>
               </div>
               <img src="/img/russia.png" alt="" class="country">
-              <img src="/img/artist2.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist2.jpg">
+                <img src="/img/artist2.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Molchat Doma
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Все песни
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2180,19 +2272,22 @@
                 </svg>
               </div>
               <img src="/img/russia.png" alt="" class="country">
-              <img src="/img/artist3.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist3.jpg">
+                <img src="/img/artist3.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Motoramaы
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Все синглы
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2202,19 +2297,22 @@
                 </svg>
               </div>
               <img src="/img/russia.png" alt="" class="country">
-              <img src="/img/artist4.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist4.jpg">
+                <img src="/img/artist4.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Human Tetris
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   3 последних альбома
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2224,19 +2322,22 @@
                 </svg>
               </div>
               <img src="/img/russia.png" alt="" class="country">
-              <img src="/img/artist5.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist5.jpg">
+                <img src="/img/artist5.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Буерак
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Все EP
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2246,19 +2347,22 @@
                 </svg>
               </div>
               <img src="/img/russia.png" alt="" class="country">
-              <img src="/img/artist6.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist6.jpg">
+                <img src="/img/artist6.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Июльские Дни
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Альбом «Колокол»
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2268,19 +2372,22 @@
                 </svg>
               </div>
               <img src="/img/england.png" alt="" class="country">
-              <img src="/img/artist7.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist7.jpg">
+                <img src="/img/artist7.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Joy Division
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Лучшее за всё время
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2290,19 +2397,22 @@
                 </svg>
               </div>
               <img src="/img/england.png" alt="" class="country">
-              <img src="/img/artist8.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist8.jpg">
+                <img src="/img/artist8.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   The Cure
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Лучшее за всё время
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2312,19 +2422,22 @@
                 </svg>
               </div>
               <img src="/img/england.png" alt="" class="country">
-              <img src="/img/artist9.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist9.jpg">
+                <img src="/img/artist9.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   The Smiths
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Период 1984-1988
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2334,19 +2447,22 @@
                 </svg>
               </div>
               <img src="/img/england.png" alt="" class="country">
-              <img src="/img/artist10.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist10.jpg">
+                <img src="/img/artist10.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   New Order
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Хиты
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2356,19 +2472,22 @@
                 </svg>
               </div>
               <img src="/img/england.png" alt="" class="country">
-              <img src="/img/artist11.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist11.jpg">
+                <img src="/img/artist11.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Bauhaus
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   Все синглы
                 </div>
               </div>
             </a>
           </li>
           <li class="music__artist__list-item">
-            <a href="##" style="height: 0;">
+            <a href="#" style="height: 0;">
               <div class="music__artist__list-item__hover">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="24" cy="24" r="21" fill="#6D31EE" />
@@ -2378,12 +2497,15 @@
                 </svg>
               </div>
               <img src="/img/england.png" alt="" class="country">
-              <img src="/img/artist12.jpg" alt="">
+              <picture>
+                <source srcset="/img/artist12.jpg">
+                <img src="/img/artist12.jpg" alt="">
+              </picture>
               <div class="music__artist__list-item__info">
-                <div class="artist__name">
+                <h3 class="music__list__artist__name">
                   Gang Of Four
-                </div>
-                <div class="artist__musics">
+                </h3>
+                <div class="music__list__artist__musics">
                   3 последних альбома
                 </div>
               </div>
@@ -2418,7 +2540,7 @@
         <div class="buy__price">
           2800 руб
         </div>
-        <a href="##" class="buy__link">
+        <a href="javascript:void(0)" class="buy__link" id="buy">
           <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_2828_60)">
               <path
@@ -2440,7 +2562,7 @@
     </div>
   </section>
 
-  <section class="about">
+  <section class="about" id="about">
     <div class="container">
       <div class="about__up">
         <h2 class="about__title">
@@ -2458,56 +2580,76 @@
       <div class="about__down">
         <ul class="about__list">
           <li class="about__list-item">
-            <img src="/img/musicant1.jpg" alt="" class="musicant__img">
+            <picture>
+              <source srcset="/img/frame-about-list-568-1.jpg" media="(max-width: 568px)">
+              <source srcset="/img/frame-about-list-768.jpg" media="(max-width: 995px)">
+              <source srcset="/img/frame-about-list-1024-1.jpg" media="(max-width: 1128px)">
+              <img src="/img/musicant1.jpg" alt="" class="about__list__musicant__img">
+            </picture>
             <div class="about__list-item__info">
-              <div class="about__item__info-name">
+              <h3 class="about__item__info-name">
                 Дмитрий Гутенберг
-              </div>
+              </h3>
               <div class="about__item__info-info">
                 Эксперт (ну, почти) по всем вопросам (почти).
               </div>
             </div>
           </li>
           <li class="about__list-item">
-            <img src="/img/musicant2.jpg" alt="" class="musicant__img">
+            <picture>
+              <source srcset="/img/frame-about-list-568-2.jpg" media="(max-width: 568px)">
+              <source srcset="/img/frame-about-list-768-1.jpg" media="(max-width: 995px)">
+              <source srcset="/img/frame-about-list-1024-2.jpg" media="(max-width: 1128px)">
+              <img src="/img/musicant2.jpg" alt="" class="about__list__musicant__img">
+            </picture>
             <div class="about__list-item__info">
-              <div class="about__item__info-name">
+              <h3 class="about__item__info-name">
                 Анна Васильева
-              </div>
+              </h3>
               <div class="about__item__info-info">
                 Как я здесь оказалась? А главное — зачем?
               </div>
             </div>
           </li>
           <li class="about__list-item">
-            <img src="/img/musicant3.jpg" alt="" class="musicant__img">
+            <picture>
+              <source srcset="/img/frame-about-list-568-3.jpg" media="(max-width: 568px)">
+              <source srcset="/img/frame-about-list-768-2.jpg" media="(max-width: 995px)">
+              <source srcset="/img/frame-about-list-1024-3.jpg" media="(max-width: 1128px)">
+              <img src="/img/musicant3.jpg" alt="" class="about__list__musicant__img">
+            </picture>
             <div class="about__list-item__info">
-              <div class="about__item__info-name">
+              <h3 class="about__item__info-name">
                 Пётр Дмитриевский
-              </div>
+              </h3>
               <div class="about__item__info-info">
                 Господа! Внимание!! Благодарю за внимание!!!
               </div>
             </div>
           </li>
           <li class="about__list-item">
-            <img src="/img/musicant4.jpg" alt="" class="musicant__img">
+            <picture>
+              <source srcset="/img/frame-about-list-568-4.jpg" media="(max-width: 568px)">
+              <source srcset="/img/frame-about-list-768-3.jpg" media="(max-width: 995px)">
+              <source srcset="/img/frame-about-list-1024-4.jpg" media="(max-width: 1128px)">
+              <img src="/img/musicant4.jpg" alt="" class="about__list__musicant__img">
+            </picture>
             <div class="about__list-item__info">
-              <div class="about__item__info-name">
+              <h3 class="about__item__info-name">
                 Татьяна Флеганова
-              </div>
+              </h3>
               <div class="about__item__info-info">
                 Одна я в пальто стою красивая, а вокруг...
               </div>
             </div>
           </li>
         </ul>
-        <form action="" class="about__form">
+        <form class="about__form">
           <textarea name="Message" id="Message" cols="30" rows="10" placeholder="Что скажете?"
-            class="about__form__textarea"></textarea>
+            class="about__form__textarea" data-validate-field="what"></textarea>
           <br>
           <div class="inputs">
-            <input type="name" data-validate-field="name" placeholder="Имя" class="about__form__item" id="name">
+            <input type="text" data-validate-field="name" placeholder="Имя" class="about__form__item" id="name">
             <input type="email" name="Email" placeholder="E-mail" class="about__form__item" data-validate-field="mail">
           </div>
           <div class="about__form__button">
@@ -2515,7 +2657,7 @@
               Отправить
             </button>
             <br>
-            <input type="checkbox" class="about__form__checkbox" name="Agree" id="Agree">
+            <input type="checkbox" class="about__form__checkbox" name="Agree" id="Agree"  data-validate-field="checkbox">
             <label for="Agree" class="about__form__item__text">Согласен на обработку персональных данных</label>
           </div>
         </form>
@@ -2570,44 +2712,79 @@
             </li>
           </ul>
         </div>
-        <div class="footer__right">
+        <div class="footer__right" id="list-footer">
           <ul class="footer__right__list">
             <li class="footer__right__list-item">
-              <a href="##" class="footer__link">
+              <a href="#" class="footer__link">
                 Подкасты
               </a>
-              <a href="##" class="footer__link">
+              <a href="#" class="footer__link">
                 Передачи
               </a>
-              <a href="##" class="footer__link">
+              <a href="#" class="footer__link">
                 Гости
               </a>
             </li>
             <li class="footer__right__list-item">
-              <a href="##" class="footer__link">
+              <a href="#" class="footer__link">
                 Плейлисты
               </a>
-              <a href="##" class="footer__link">
+              <a href="#" class="footer__link">
                 Сетка
               </a>
-              <a href="##" class="footer__link">
+              <a href="#" class="footer__link">
                 О нас
               </a>
             </li>
             <li class="footer__right__list-item">
-              <a href="##" class="footer__link">
+              <a href="#" class="footer__link">
                 Новости
               </a>
-              <a href="##" class="footer__link">
+              <a href="#" class="footer__link">
                 Блоги
               </a>
-              <a href="##" class="footer__link">
+              <a href="#" class="footer__link">
                 Топы
               </a>
             </li>
           </ul>
         </div>
       </div>
+    </div>
+    <div class="footer__right" id="list-footer1">
+      <ul class="footer__right__list">
+        <li class="footer__right__list-item">
+          <a href="#" class="footer__link">
+            Подкасты
+          </a>
+          <a href="#" class="footer__link">
+            Передачи
+          </a>
+          <a href="#" class="footer__link">
+            Гости
+          </a>
+          <a href="#" class="footer__link">
+            Плейлисты
+          </a>
+          <a href="#" class="footer__link">
+            Сетка
+          </a>
+        </li>
+        <li class="footer__right__list-item">
+          <a href="#" class="footer__link">
+            О нас
+          </a>
+          <a href="#" class="footer__link">
+            Новости
+          </a>
+          <a href="#" class="footer__link">
+            Блоги
+          </a>
+          <a href="#" class="footer__link">
+            Топы
+          </a>
+        </li>
+      </ul>
     </div>
     <div class="footer__down">
       <div class="container">
@@ -2617,63 +2794,6 @@
       </div>
     </div>
   </footer>
-
-  <script src="/js/choices.min.js"></script>
-
-  <script>
-
-    const element = document.querySelector('select');
-    const choices = new Choices(element, {
-      searchEnabled: false,
-      itemSelectText: '',
-      placeholder: true,
-      placeholderValue: 1,
-    });
-
-  </script>
-
-  <script src="/js/inputmask.min.js"></script>
-  <script src="/js/just-validate.min.js"></script>
-
-  <script>
-    new JustValidate('.about__form', {
-
-      colorWrong: '#FF5C00',
-
-      messages: {
-        name: {
-          required: 'Как вас зовут?',
-          minLength: 'Минимум должно быть 2 символа',
-          value: 'Ошибка',
-        },
-
-        mail: {
-          required: 'Укажите ваш e-mail'
-        }
-      },
-
-      rules: {
-        name: {
-          required: true,
-          minLength: 2,
-          maxNumber: 0,
-          value: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/,
-        },
-
-        // mail: {
-        //   required: true,
-        //   email: true,
-        // },
-      },
-    })
-
-    const swiper = new Swiper('.swiper', {
-      direction: 'horizontal',
-      loop: true,
-      width: 120,
-    });
-
-  </script>
 
 </body>
 
